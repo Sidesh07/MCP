@@ -26,6 +26,8 @@ GITLAB_REDIRECT_URI = os.getenv("GITLAB_REDIRECT_URI")
 # GitLab OAuth endpoints
 AUTHORIZE_URL = "https://gitlab.com/oauth/authorize"
 TOKEN_URL = "https://gitlab.com/oauth/token"
+USER_INFO_URL = "https://gitlab.com/api/v4/user"
+USER_REPOS_URL = "https://gitlab.com/api/v4/projects?membership=true"
 
 @mcp.tool()
 def get_authorization_url(state: str) -> str:
@@ -39,7 +41,7 @@ def get_authorization_url(state: str) -> str:
             "redirect_uri": GITLAB_REDIRECT_URI,
             "response_type": "code",
             "state": state,
-            "scope": "read_user"
+            "scope": "read_user api"
         }
         query_string = "&".join(f"{key}={value}" for key, value in params.items())
         url = f"{AUTHORIZE_URL}?{query_string}"
@@ -70,6 +72,40 @@ def exchange_code_for_token(code: str) -> dict:
         return token_data
     except requests.RequestException as e:
         logging.error(f"Error exchanging code for token: {e}")
+        return {"error": str(e)}
+
+@mcp.tool()
+def get_user_info(access_token: str) -> dict:
+    """
+    Fetch the user's GitLab account details.
+    """
+    try:
+        logging.info("Fetching user info from GitLab.")
+        headers = {"Authorization": f"Bearer {access_token}"}
+        response = requests.get(USER_INFO_URL, headers=headers)
+        response.raise_for_status()
+        user_info = response.json()
+        logging.info(f"User info retrieved: {user_info}")
+        return user_info
+    except requests.RequestException as e:
+        logging.error(f"Error fetching user info: {e}")
+        return {"error": str(e)}
+
+@mcp.tool()
+def get_user_repos(access_token: str) -> list:
+    """
+    Fetch the user's repositories from GitLab.
+    """
+    try:
+        logging.info("Fetching user repositories from GitLab.")
+        headers = {"Authorization": f"Bearer {access_token}"}
+        response = requests.get(USER_REPOS_URL, headers=headers)
+        response.raise_for_status()
+        repos = response.json()
+        logging.info(f"Repositories retrieved: {repos}")
+        return repos
+    except requests.RequestException as e:
+        logging.error(f"Error fetching user repositories: {e}")
         return {"error": str(e)}
 
 if __name__ == "__main__":
