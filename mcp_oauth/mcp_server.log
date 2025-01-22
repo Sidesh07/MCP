@@ -1,0 +1,20 @@
+2025-01-22 11:54:24,801 - INFO - Starting MCP server for GitLab OAuth.
+2025-01-22 11:54:24,804 - DEBUG - Initializing server 'gitlab_oauth'
+2025-01-22 11:54:24,804 - DEBUG - Registering handler for ListToolsRequest
+2025-01-22 11:54:24,804 - DEBUG - Registering handler for CallToolRequest
+2025-01-22 11:54:24,804 - DEBUG - Registering handler for ListResourcesRequest
+2025-01-22 11:54:24,804 - DEBUG - Registering handler for ReadResourceRequest
+2025-01-22 11:54:24,804 - DEBUG - Registering handler for PromptListRequest
+2025-01-22 11:54:24,804 - DEBUG - Registering handler for GetPromptRequest
+2025-01-22 11:54:24,814 - INFO - Running MCP server...
+2025-01-22 11:54:24,823 - DEBUG - Using proactor: IocpProactor
+2025-01-22 11:59:41,877 - INFO - Starting MCP server for GitLab OAuth.
+2025-01-22 11:59:41,879 - DEBUG - Initializing server 'gitlab_oauth'
+2025-01-22 11:59:41,879 - DEBUG - Registering handler for ListToolsRequest
+2025-01-22 11:59:41,879 - DEBUG - Registering handler for CallToolRequest
+2025-01-22 11:59:41,879 - DEBUG - Registering handler for ListResourcesRequest
+2025-01-22 11:59:41,879 - DEBUG - Registering handler for ReadResourceRequest
+2025-01-22 11:59:41,879 - DEBUG - Registering handler for PromptListRequest
+2025-01-22 11:59:41,879 - DEBUG - Registering handler for GetPromptRequest
+2025-01-22 11:59:41,890 - INFO - Running MCP server...
+2025-01-22 11:59:41,894 - DEBUG - Using proactor: IocpProactor
